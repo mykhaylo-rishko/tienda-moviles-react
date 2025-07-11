@@ -2,33 +2,14 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import ProductDescription from '../components/ProductDescription';
 import ProductActions from '../components/ProductActions';
+import useFetchWithCache from '../hooks/useFetchWithCache';
 import './ProductDetailPage.css';
 
 export default function ProductDetailPage() {
   const { productId } = useParams();
-  const [product, setProduct] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchProductDetails = async () => {
-      setIsLoading(true);
-      try {
-        const response = await fetch(`https://itx-frontend-test.onrender.com/api/product/${productId}`);
-        if (!response.ok) {
-          throw new Error('No se pudo obtener el detalle del producto');
-        }
-        const data = await response.json();
-        setProduct(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchProductDetails();
-  }, [productId]);
+  const { data: product, isLoading, error } = useFetchWithCache(
+    `https://itx-frontend-test.onrender.com/api/product/${productId}`
+  );
 
   if (isLoading) return <p>Cargando detalles...</p>;
   if (error) return <p>Error: {error}</p>;

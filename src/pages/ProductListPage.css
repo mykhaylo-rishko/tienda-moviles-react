@@ -1,7 +1,5 @@
 .product-grid {
   display: grid;
-  /* Crea columnas flexibles de mínimo 250px y máximo 1fr (fracción del espacio) */
-  /* Esto hace que se ajuste automáticamente de 1 a 4 columnas según el ancho */
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 2rem;
 }

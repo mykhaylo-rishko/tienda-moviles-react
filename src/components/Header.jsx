@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { useCart } from '../context/CartContext'; // <-- Importamos el hook
+import { useCart } from '../context/CartContext';
+import Breadcrumbs from './Breadcrumbs';
 import './Header.css';
 
 export default function Header() {
@@ -11,6 +12,7 @@ export default function Header() {
         <Link to="/">TiendaMóvil</Link>
       </div>
       <div className="header-nav">
+        <Breadcrumbs />
       </div>
       <div className="header-cart">
         <span>Carrito: {cartCount} items</span>

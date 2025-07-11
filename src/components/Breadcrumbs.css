@@ -1,0 +1,17 @@
+.breadcrumbs-nav {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.breadcrumbs-nav a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.breadcrumbs-nav a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumbs-nav span {
+  color: #6c757d;
+}

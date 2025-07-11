@@ -1,17 +1,37 @@
 import { useState } from 'react';
+import { useCart } from '../context/CartContext';
 import './ProductActions.css';
 
-export default function ProductActions({ options }) {
-  // Estados para guardar la opción seleccionada por el usuario
+export default function ProductActions({ productId, options }) {
+  const { setCartCount } = useCart();
   const [selectedStorage, setSelectedStorage] = useState(options?.storages?.[0]?.code || '');
   const [selectedColor, setSelectedColor] = useState(options?.colors?.[0]?.code || '');
+  const [isAdding, setIsAdding] = useState(false);
 
-  const handleAddToCart = () => {
-    // Lógica para añadir al carrito (la implementaremos en el siguiente paso)
-    console.log('Añadiendo al carrito:', {
-      storage: selectedStorage,
-      color: selectedColor,
-    });
+ const handleAddToCart = async () => {
+    setIsAdding(true);
+    try {
+      const response = await fetch('https://itx-frontend-test.onrender.com/api/cart', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: productId,
+          colorCode: selectedColor,
+          storageCode: selectedStorage,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al añadir el producto al carrito');
+      }
+      const data = await response.json();
+      setCartCount(data.count);
+      alert('¡Producto añadido al carrito!');
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsAdding(false);
+    }
   };
 
   return (
@@ -34,8 +54,8 @@ export default function ProductActions({ options }) {
           </select>
         </div>
       </div>
-      <button className="add-to-cart-btn" onClick={handleAddToCart}>
-        Añadir al carrito
+      <button className="add-to-cart-btn" onClick={handleAddToCart} disabled={isAdding}>
+      {isAdding ? 'Añadiendo...' : 'Añadir al carrito'}
       </button>
     </div>
   );

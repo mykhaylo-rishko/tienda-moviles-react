@@ -28,7 +28,7 @@ export default function ProductDetailPage() {
     };
 
     fetchProductDetails();
-  }, [productId]); // El efecto se ejecuta cada vez que el productId cambie
+  }, [productId]);
 
   if (isLoading) return <p>Cargando detalles...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -43,7 +43,7 @@ export default function ProductDetailPage() {
         </div>
         <div className="pdp-details-container">
           <ProductDescription product={product} />
-          <ProductActions options={product.options} />
+          <ProductActions productId={product.id} options={product.options} />
         </div>
       </div>
     </div>

@@ -1,0 +1,23 @@
+.app-header {
+  background-color: var(--color-surface);
+  padding: 1rem 2rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-logo a {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.header-logo a:hover {
+  text-decoration: none;
+  color: var(--color-primary);
+}
+
+.header-cart {
+  font-weight: 500;
+}

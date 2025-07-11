@@ -1,9 +1,18 @@
+import { Outlet } from 'react-router-dom';
+import Header from './components/Header';
+import './App.css';
+
 function App() {
   return (
-    <>
-      <h1>Tienda de Móviles</h1>
-    </>
-  )
+    <div>
+      <Header />
+      <div className="app-container">
+        <main className="main-content">
+          <Outlet />
+        </main>
+      </div>
+    </div>
+  );
 }
 
-export default App
+export default App;
